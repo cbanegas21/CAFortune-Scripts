@@ -11,6 +11,9 @@ from requests.auth import HTTPBasicAuth
 from contextlib import closing
 from tenacity import retry, stop_after_attempt, wait_fixed, retry_if_exception_type
 
+
+
+# THIS IS A TEST     
 # Configuración                                             
 CHUNK_SIZE = 1000
 MAX_COL_NAME_LEN = 100
