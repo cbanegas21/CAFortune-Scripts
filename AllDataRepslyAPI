@@ -1,0 +1,100 @@
+import requests
+import time
+import json
+from datetime import datetime
+
+# Your credentials
+USERNAME = '80941603-F785-4E0F-8AB1-ED798E54F88C'
+PASSWORD = '17BCD0FD-94DD-4B0C-B059-76D68C1145A8'
+
+# Starting LastID (updated)
+LAST_FORM_ID = 228698951
+
+# Retry configuration
+MAX_RETRIES = 5
+RETRY_DELAY = 5  # seconds
+
+# File to store all forms
+OUTPUT_FILE = 'retrieved_forms.json'
+
+# Simple date formatter just for printing
+def convert_ms_date(ms_date_string):
+    """
+    Converts /Date(1725340162000+0000)/ to 'YYYY-MM-DD HH:MM:SS'.
+    Returns 'N/A' if parsing fails.
+    """
+    try:
+        timestamp = int(ms_date_string[6:19])  # e.g., 1725340162000
+        return datetime.utcfromtimestamp(timestamp / 1000).strftime('%Y-%m-%d %H:%M:%S')
+    except:
+        return "N/A"
+
+def main():
+    all_forms = []
+    last_form_id = LAST_FORM_ID
+
+    # Create a single session to reuse connections
+    with requests.Session() as session:
+        session.auth = (USERNAME, PASSWORD)
+        session.headers.update({'Content-Type': 'application/json'})
+
+        while True:
+            total_count = 0
+
+            # Attempt up to MAX_RETRIES times for each batch
+            for attempt in range(MAX_RETRIES):
+                try:
+                    url = f'https://api.repsly.com/v3/export/forms/{last_form_id}'
+                    resp = session.get(url)
+                    resp.raise_for_status()
+
+                    data = resp.json()
+                    forms = data.get('Forms', [])
+
+                    # Append new forms to our master list
+                    all_forms.extend(forms)
+
+                    # Update metadata
+                    meta = data.get('MetaCollectionResult', {})
+                    total_count = meta.get('TotalCount', 0)
+                    last_form_id = meta.get('LastID', last_form_id)
+
+                    # Print minimal info for this batch
+                    print(f"{len(forms)} forms retrieved. LastID updated to {last_form_id}.")
+
+                    if forms:
+                        last_form_date_raw = forms[-1].get('DateAndTime', '/Date(NA)/')
+                        print(f" - Last form date (formatted): {convert_ms_date(last_form_date_raw)}")
+
+                    # If no more forms to retrieve, break out
+                    if total_count == 0:
+                        print("All available forms have been retrieved.")
+                        break
+
+                    # Break out of retry loop since this request succeeded
+                    break
+
+                except Exception as e:
+                    print(f"Attempt {attempt+1}/{MAX_RETRIES} failed: {e}")
+                    if attempt + 1 == MAX_RETRIES:
+                        print(f"Maximum retries reached. Last known LastID: {last_form_id}")
+                        break
+                    time.sleep(RETRY_DELAY)
+
+            # If we've retrieved everything or hit max retries, stop the main loop
+            if total_count == 0 or attempt + 1 == MAX_RETRIES:
+                break
+
+    # Save all forms to JSON
+    with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
+        json.dump(all_forms, f, indent=4, ensure_ascii=False)
+
+    print(f"\nA total of {len(all_forms)} forms were retrieved and saved to '{OUTPUT_FILE}'.")
+
+    # Print the date of the very last form overall
+    if all_forms:
+        final_form_date_raw = all_forms[-1].get('DateAndTime', '/Date(NA)/')
+        print(f"Last overall form date (formatted): {convert_ms_date(final_form_date_raw)}")
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PUR GUM Reporting Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                  url("background.png") center/cover no-repeat;
+      z-index: -1;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* HEADER */
+    .header {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to right, #73aeea, #e524f6);
+      padding: 15px 30px;
+    }
+    .header-logo-wrapper {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      border-radius: 50px;
+    }
+    .header img {
+      height: 48px;
+    }
+    .header h1 {
+      color: #abf4fd;
+      font-size: 1.6em;
+      font-weight: 700;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 40px 20px;
+      overflow-y: auto;
+    }
+
+    .welcome-box {
+      background: rgba(246, 148, 255, 0.3);
+      backdrop-filter: blur(10px);
+      padding: 25px 35px;
+      border-radius: 4px;
+      max-width: 600px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .welcome-box h2 {
+      color: #2dfb91;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+
+    .welcome-box p {
+      color: #ffffff;
+      font-size: 1em;
+    }
+
+    .subtext {
+      color: #abf4fd;
+      margin-top: 8px;
+      font-size: 0.95em;
+      font-weight: 500;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    .report-card {
+      background: rgba(255, 255, 255, 0.472);
+      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .report-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(199, 2, 229, 0.9);
+    }
+
+    .report-card img {
+      width: 100%;
+      height: 76px;
+      object-fit: contain;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .report-card span {
+      display: block;
+      padding: 12px;
+      font-size: 1em;
+      text-align: center;
+      font-weight: 600;
+      color: #000000;
+      text-shadow:
+        -1px -1px 0 #fff,
+        1px -1px 0 #fff,
+        -1px  1px 0 #fff,
+        1px  1px 0 #fff;
+    }
+
+
+
+    .report-card a {
+      text-decoration: none;
+      display: block;
+    }
+
+    footer {
+      flex: 0 0 auto;
+      background: linear-gradient(to right, #40566d, #ef24f6);
+      color: #ffffff;
+      text-align: center;
+      padding: 22px;
+      font-size: 0.95em;
+    }
+
+    footer a {
+      color: #2dfb91;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 1024px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+      .header img {
+        height: 42px;
+      }
+      .header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-logo-wrapper">
+        <img src="logo.png" alt="Our Home Logo" />
+      </div>
+      <h1>PUR GUM Reporting Portal</h1>
+      <img src="CAFORTUNE.png" alt="CAFORTUNE Logo" />
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="welcome-box">
+        <h2>Welcome to PUR GUM Reporting Portal</h2>
+        <p>Quickly access your reports.</p>
+        <div class="subtext">Reports V2</div>
+      </div>
+
+      <div class="gallery">
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiNzE4NDM0MjUtMWI1Ni00ZDBjLWFmMTgtMzM2MTM0MDg2NTViIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="wholefoods.png" alt="Pur Gum Whole Foods"><span>Pur Gum Whole Foods</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiOWQ0YTUwMzItM2M2Zi00MTFkLWFhYzItMDU5MjFkNmU1ZGExIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="Sprouts.png" alt="Pur Gum Sprouts"><span>Pur Gum Sprouts</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiZjBhNTkxNzctMDNmMC00MzQ3LWFkMTMtOWZjZjk4MjJkMjM5IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="TFM.png" alt="Pur Gum The Fresh Market"><span>Pur Gum The Fresh Market</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiNzcxNTdlYjYtMTY2NS00NmEwLWFhYzktYTI0YmM2MTgzZjU1IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="nuggetmarket.png" alt="Pur Gum Nugget Market"><span>Pur Gum Nugget Market</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiMTBiMWE5MmYtYzIwZS00NzFlLTk2ZmEtM2Q4M2Y5ZjE1MDc0IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="Lassens.png" alt="Pur Gum Lassens"><span>Pur Gum Lassens</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiZGU1Y2MzZDctNDA5Zi00NThiLWE3ZTMtYjdmODMwY2JjNjZkIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="INFRA.png" alt="Pur Gum INFRA"><span>Pur Gum INFRA</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiNTMyM2U2YjYtYWNhOC00NDE0LTgxNzMtNzBhODFkNGQ5MGExIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="NCG.png" alt="Pur Gum NCG"><span>Pur Gum NCG</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiMTMzMGFjOTgtOWI2MS00OThlLTgwMWYtMDY2YmMwY2NiZGVmIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="EREWHON.png" alt="Pur Gum Erewhon"><span>Pur Gum Erewhon</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiN2ZlY2FkYjItMDYxNS00NWFmLWFjZTgtYTUyNjM5MTJmOGM5IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="LAZY ACRES.png" alt="Pur Gum Lazy Acres"><span>Pur Gum Lazy Acres</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiMTMzMzAxYTAtNzUyOC00MmFlLWI1ZjctYzZmYzZlMTkwNTMzIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="wakefern.png" alt="Pur Gum Wakefern"><span>Pur Gum Wakefern</span></a></div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      &copy; 2025 Pur Gum Reports. Made by Carlos Banegas from CAFortune.
+      <a href="https://thepurcompany.com" target="_blank">Visit Pur Gum</a>
+    </footer>
+  </div>
+</body>

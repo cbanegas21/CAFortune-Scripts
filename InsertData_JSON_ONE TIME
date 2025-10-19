@@ -1,0 +1,204 @@
+import os
+import json
+import pandas as pd
+import pyodbc
+import tkinter as tk
+from tkinter import filedialog
+from datetime import datetime, timezone
+
+# Config
+CHUNK_SIZE = 1000
+MAX_COL_NAME_LEN = 100
+SERVER = 'ca-data-server.database.windows.net'
+DATABASE = 'CAFortuneDatabase'
+USERNAME = 'sqladmin'
+PASSWORD = 'Maxine2021.'
+DRIVER = '{ODBC Driver 17 for SQL Server}'
+
+# Build connection
+conn_str = f'DRIVER={DRIVER};SERVER={SERVER};DATABASE={DATABASE};UID={USERNAME};PWD={PASSWORD}'
+
+def get_db_connection():
+    conn = pyodbc.connect(conn_str, autocommit=False)
+    cursor = conn.cursor()
+    cursor.fast_executemany = True
+    return conn, cursor
+
+# File picker
+def select_file():
+    root = tk.Tk()
+    root.withdraw()
+    return filedialog.askopenfilename(title="Select JSON file", filetypes=[("JSON files", "*.json")])
+
+# Clean date
+def convert_date(ms_date):
+    if not ms_date or not ms_date.startswith("/Date("):
+        return None
+    try:
+        timestamp = int(ms_date[6:19])
+        return datetime.fromtimestamp(timestamp / 1000, tz=timezone.utc)
+    except:
+        return None
+
+def clean_column(field_name):
+    base = field_name.strip().replace(" ", "_").replace("/", "_").replace("-", "_")
+    cleaned = ''.join(c for c in base if c.isalnum() or c == "_").lower()
+    return cleaned[:MAX_COL_NAME_LEN]
+
+# Ensure unique column names
+def ensure_unique_columns(column_order):
+    seen = set()
+    unique_columns = []
+    for col in column_order:
+        if col not in seen:
+            unique_columns.append(col)
+            seen.add(col)
+    return unique_columns
+
+# Create table
+def ensure_table_exists(cursor, table_name, column_order):
+    column_order = ensure_unique_columns(column_order)
+    columns_sql = []
+    for col in column_order:
+        if col in {"DateAndTime", "VisitStart", "VisitEnd"}:
+            col_type = "DATETIME2"
+        else:
+            col_type = "NVARCHAR(MAX)"
+        columns_sql.append(f"[{col}] {col_type}")
+
+    create_stmt = f"""
+    IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '{table_name}')
+    CREATE TABLE [{table_name}] (
+        {', '.join(columns_sql)}
+    )
+    """
+    cursor.execute(create_stmt)
+
+# Insert rows in chunks
+def insert_chunk(cursor, table_name, df, column_order):
+    column_order = ensure_unique_columns(column_order)
+    placeholders = ", ".join(["?"] * len(column_order))
+    columns = ", ".join(f"[{col}]" for col in column_order)
+    insert_sql = f"INSERT INTO [{table_name}] ({columns}) VALUES ({placeholders})"
+
+    safe_df = df.copy()
+    for col in safe_df.columns:
+        if pd.api.types.is_datetime64_any_dtype(safe_df[col]):
+            safe_df[col] = pd.to_datetime(safe_df[col], errors='coerce')
+        else:
+            safe_df[col] = safe_df[col].astype(str)
+
+    safe_df = safe_df[column_order]
+    cursor.executemany(insert_sql, safe_df.values.tolist())
+
+# Process JSON with clean column logic and skipping duplicates
+def process_json(path):
+    with open(path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+
+    form_tables = {}
+    form_columns = {}
+
+    for entry in data:
+        form_name = clean_column(entry["FormName"])
+        if form_name not in form_tables:
+            form_tables[form_name] = []
+            form_columns[form_name] = set()
+
+        # Static fields
+        row = {
+            "FormID": entry.get("FormID"),
+            "ClientCode": entry.get("ClientCode"),
+            "ClientName": entry.get("ClientName"),
+            "DateAndTime": convert_date(entry.get("DateAndTime")),
+            "RepresentativeCode": entry.get("RepresentativeCode"),
+            "RepresentativeName": entry.get("RepresentativeName"),
+            "StreetAddress": entry.get("StreetAddress"),
+            "ZIP": entry.get("ZIP"),
+            "City": entry.get("City"),
+            "State": entry.get("State"),
+            "Country": entry.get("Country"),
+            "Email": entry.get("Email"),
+            "Phone": entry.get("Phone"),
+            "Mobile": entry.get("Mobile"),
+            "Territory": entry.get("Territory"),
+            "Longitude": entry.get("Longitude"),
+            "Latitude": entry.get("Latitude"),
+            "SignatureURL": entry.get("SignatureURL"),
+            "VisitStart": convert_date(entry.get("VisitStart")),
+            "VisitEnd": convert_date(entry.get("VisitEnd")),
+            "VisitID": entry.get("VisitID"),
+        }
+
+        seen = set(row.keys())
+        field_counter = {}
+
+        for item in entry.get("Items", []):
+            raw_field = item["Field"]
+            if not raw_field:
+                continue
+            clean_col = clean_column(raw_field)
+            if len(clean_col) > MAX_COL_NAME_LEN:
+                continue
+
+            # Count how many times this column name has shown up
+            field_counter[clean_col] = field_counter.get(clean_col, 0) + 1
+            if field_counter[clean_col] > 1:
+                continue  # If duplicate -> SKIP this field entirely
+
+            if clean_col in seen:
+                continue  # Just in case it's in static columns
+            row[clean_col] = item["Value"]
+            seen.add(clean_col)
+            form_columns[form_name].add(clean_col)
+
+        form_tables[form_name].append(row)
+
+    # Pad missing columns
+    for form_name, records in form_tables.items():
+        all_columns = list(form_columns[form_name])
+        for record in records:
+            for col in all_columns:
+                if col not in record:
+                    record[col] = None
+
+    return form_tables
+
+# Upload
+def upload_form(cursor, table_name, records):
+    df = pd.DataFrame(records)
+    print(f"\nUploading {len(df)} rows to {table_name}...")
+
+    column_order = list(df.columns)
+    ensure_table_exists(cursor, table_name, column_order)
+
+    for i in range(0, len(df), CHUNK_SIZE):
+        chunk = df.iloc[i:i+CHUNK_SIZE]
+        insert_chunk(cursor, table_name, chunk, column_order)
+        print(f" - Inserted chunk {i//CHUNK_SIZE + 1}/{(len(df)//CHUNK_SIZE)+1}")
+
+# MAIN
+def main():
+    json_path = select_file()
+    if not json_path:
+        print("Cancelled.")
+        return
+
+    tables = process_json(json_path)
+
+    conn, cursor = get_db_connection()
+    try:
+        for form_name, records in tables.items():
+            upload_form(cursor, form_name, records)
+        conn.commit()
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        conn.rollback()
+    finally:
+        cursor.close()
+        conn.close()
+
+    print("\nAll forms uploaded successfully!")
+
+if __name__ == "__main__":
+    main()

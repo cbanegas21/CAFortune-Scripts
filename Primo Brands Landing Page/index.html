@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Primo Premium Brands Reporting Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{width:100%;height:100%;font-family:'Montserrat',sans-serif;overflow:hidden}
+    body::before{content:"";position:fixed;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.65)),url("background.jpg") center/cover no-repeat;z-index:-1}
+
+    .container{display:flex;flex-direction:column;height:100vh}
+
+    /* HEADER */
+    .header{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to right,#73aeea,#2451f6);padding:12px 24px}
+    .header .logo{height:80px;width:auto;filter:drop-shadow(0 1px 3px rgba(0,0,0,.25))}
+    .header h1{flex:1;text-align:center;color:#abf4fd;font-size:1.55rem;font-weight:700;white-space:nowrap;margin:0}
+
+    /* HERO */
+    .hero{flex:1 1 auto;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:34px 16px;overflow-y:auto}
+    .welcome-box{background:rgba(255,255,255,.35);backdrop-filter:blur(10px);padding:22px 30px;border-radius:6px;max-width:560px;margin-bottom:36px;box-shadow:0 4px 18px rgba(0,0,0,.12);text-align:center}
+    .welcome-box h2{color:#2dfb91;font-size:1.45rem;margin-bottom:8px}
+    .welcome-box p{color:#fff;font-size:.98rem}
+    .subtext{color:#abf4fd;margin-top:6px;font-size:.9rem;font-weight:500}
+
+    /* GALLERY GRID 2 COLS */
+    .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;max-width:960px;width:100%;margin-bottom:48px}
+    .report-card{background:rgba(255,255,255,.48);backdrop-filter:blur(10px);border-radius:14px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.1);transition:transform .25s ease,box-shadow .25s ease}
+    .report-card:hover{transform:translateY(-4px);box-shadow:0 8px 18px rgba(45,251,145,.85)}
+    .report-card img{width:100%;height:80px;object-fit:contain;padding:10px;background:rgba(255,255,255,.12)}
+    .report-card span{display:block;padding:14px 10px;font-size:1rem;text-align:center;font-weight:600;color:#000;text-shadow:-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff}
+    .report-card a{text-decoration:none;display:block}
+
+    footer{flex:0 0 auto;background:linear-gradient(to right,#40566d,#2451f6);color:#fff;text-align:center;padding:20px;font-size:.9rem}
+    footer a{color:#2dfb91;text-decoration:none;font-weight:600}
+    footer a:hover{text-decoration:underline}
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .gallery{grid-template-columns:1fr}
+      .header{padding:12px 16px}
+      .header h1{font-size:1.3rem}
+      .header .logo{height:60px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- HEADER -->
+    <header class="header">
+      <img class="logo" src="primo-brands-logo.png" alt="Primo Premium Brands Logo" />
+      <h1>Primo Premium Brands Reporting Portal</h1>
+      <img class="logo" src="CAFORTUNE.png" alt="CAFORTUNE Logo" />
+    </header>
+
+    <!-- HERO SECTION -->
+    <main class="hero">
+      <div class="welcome-box">
+        <h2>Welcome to Primo Premium Brands<br>Retailer Reporting Portal</h2>
+        <p>Quickly access your retailer reports below.</p>
+        <div class="subtext">Reports V2</div>
+      </div>
+
+      <!-- DASHBOARD GALLERY (Left = Whole Foods, Right = Sprouts) -->
+      <section class="gallery">
+        <!-- Row 1 -->
+        <div class="report-card">
+          <a href="https://app.powerbi.com/view?r=eyJrIjoiMjkzZWRjZGQtYjg2ZC00NjA4LWI3Y2ItYWFkMjYxNmY1NzUxIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+            <img src="wholefoods.png" alt="Whole Foods 24‑Pack" />
+            <span>24‑Pack Regional Spring Water – Whole Foods</span>
+          </a>
+        </div>
+
+        <div class="report-card">
+          <a href="https://app.powerbi.com/view?r=eyJrIjoiYWY3YzAxZmUtM2RmOS00ODIzLWE1ZDMtMTg4YjFlZDA1MWU0IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+            <img src="sprouts.png" alt="Sprouts 24‑Pack" />
+            <span>2.5 gallon Regional Water - Sprouts</span>
+          </a>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="report-card">
+          <a href="https://app.powerbi.com/view?r=eyJrIjoiNTFmYTIwYTktZDY4My00NWFjLTgzOTEtZThmM2MyZTQ1Zjk4IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+            <img src="wholefoods.png" alt="Whole Foods Premium" />
+            <span>Premium Water Brands – Whole Foods</span>
+          </a>
+        </div>
+
+        <div class="report-card">
+          <a href="https://app.powerbi.com/view?r=eyJrIjoiNmE2NzJiODctYWEwZS00MWE0LWE2NzUtN2E5MjJkMzYxM2Q5IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+            <img src="sprouts.png" alt="Sprouts Premium" />
+            <span>Premium Water Brands – Sprouts</span>
+          </a>
+        </div>
+
+        <div class="report-card">
+          <a href="https://app.powerbi.com/view?r=eyJrIjoiYzAxZmMwOTgtYTAyYi00MjlhLTk5ZjMtMzQzMDc3NjhhMDZiIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+            <img src="naturalgrocers.png" alt="Primo NGVC" />
+            <span>Primo – NGVC</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      &copy; 2025 Primo Premium Brands Reports. Built by Carlos Banegas.
+      <a href="https://www.primobrands.com" target="_blank" rel="noopener noreferrer">Visit Primo Brands</a>
+    </footer>
+  </div>
+</body>
+</html>

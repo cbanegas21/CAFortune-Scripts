@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hain Celestial Reports</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #1d603b;
+            background: linear-gradient(180deg, #b5e48c, #52b788);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Styling */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 50px 20px;
+            background-color: rgba(0, 0, 0, 0);
+            position: relative;
+        }
+
+        .header img {
+            position: absolute;
+            left: 20px;
+            height: 100px;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            color: #1d603b;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            font-weight: 700;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Section Title */
+        h2 {
+            font-size: 1.5em;
+            color: #1d603b;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* Gallery Container */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        /* Individual Container (Caption + Image) */
+        .gallery div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            width: 150px; /* Fixed width */
+            height: 200px; /* Fixed height for consistent layout */
+            box-sizing: border-box;
+        }
+
+        /* Caption Styling */
+        .gallery .caption {
+            text-align: center;
+            font-size: 0.9em;
+            font-weight: 700;
+            color: #1d603b;
+            max-width: 150px;
+            word-wrap: break-word;
+            line-height: 1.2; /* Adjusts spacing between lines */
+            margin-bottom: 5px;
+        }
+
+        /* Button Styling */
+        .gallery a {
+            display: block;
+            width: 150px; /* Matches the container width */
+            height: 120px; /* Ensures all buttons are the same height */
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            flex-shrink: 0; /* Prevents shrinking of buttons */
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures images fit neatly inside buttons */
+            transition: transform 0.3s;
+        }
+
+        /* Hover Effects */
+        .gallery a:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery a:hover {
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Footer Styling */
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            font-size: 0.9em;
+            color: #fff;
+            background: #1d603b;
+            text-align: center;
+        }
+
+        footer a {
+            color: #ffe14a;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Logo and Title -->
+    <div class="header">
+        <img src="logo.png" alt="Hain Celestial Logo">
+        <h1>Hain Celestial Reports</h1>
+    </div>
+
+    <!-- Data Reports Section -->
+    <h2>Data Reports</h2>
+    <div class="gallery">
+        <div>
+            <div class="caption">Hain Snacks Independent</div>
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiYjgwOTA4NTQtOWI0MC00N2Y5LThhM2YtYTkwYjlhYTg1YTM4IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank">
+                <img src="logo.png" alt="Hain Snacks Independent">
+            </a>
+        </div>
+        <div>
+            <div class="caption">Terra (Hain)</div>
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiNTAwM2QzOWUtZDdiZC00ZDc2LWEyZjYtNjJmODE5NTliODVjIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank">
+                <img src="terra.png" alt="Terra (Hain)">
+            </a>
+        </div>
+        <div>
+            <div class="caption">Garden of Veggie</div>
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiMzM4YjViNzAtMDFiNy00Nzc3LThhYzMtZTM4YTUwNWFlYzM0IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank">
+                <img src="gardenofveggie.jpeg" alt="Garden of Veggie NEW">
+            </a>
+        </div>
+        <div>
+            <div class="caption">Garden of Eatin' Tortilla</div>
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiZGE2MTJjYzktMjNmZC00YTU3LWI5ZmEtODczNGEyOGEzODAwIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank">
+                <img src="garden_of_eatin_tortilla.png" alt="Garden of Eatin' Tortilla NEW">
+            </a>
+        </div>
+    </div>
+
+    <!-- Executive Reports Section -->
+    <h2>Executive Reports</h2>
+    <div class="gallery">
+        <div>
+            <div class="caption">Hain Executive Summary</div>
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiMGQ4NTYzNmUtMTQ2My00NThjLTgxYTUtMGU5ZTk0ZTNhMmVhIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank">
+                <img src="logo.png" alt="Hain Executive Summary">
+            </a>
+        </div>
+        <div>
+            <div class="caption">Garden of Eatin' Executive Summary</div>
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiYjA1YjFmZjQtMjI1ZC00NDZkLTgwYTUtM2NmMmI5NTNmMmIxIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank">
+                <img src="garden_of_eatin_tortilla.png" alt="Garden of Eatin' Executive Summary">
+            </a>
+        </div>
+        <div>
+            <div class="caption">Garden Veggie Straws Executive Summary</div>
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiZTM5YjRmODAtYzhmNy00MGFlLWE3MzYtMjBhNjI5NmUzMTVlIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank">
+                <img src="gardenofveggie.jpeg" alt="Garden Veggie Straws Executive Summary">
+            </a>
+        </div>
+        <div>
+            <div class="caption">Terra (Hain) Executive Summary</div>
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiZjU1NzkyMTQtMjBlMS00MjczLWIyNzItNjQ3NDFiZGQ5OTI5IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank">
+                <img src="terra.png" alt="Terra (Hain) Executive Summary">
+            </a>
+        </div>
+        <div>
+            <div class="caption">Celestial Tea Executive Summary</div>
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiYjczYmNiYWItNzY3ZC00M2U1LThjMGQtMTY1ZDg5MTVjZWQxIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9#" target="_blank">
+                <img src="celestial_tea.png" alt="Celestial Tea Executive Summary">
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Hain Celestial Reports. Made by Carlos Banegas from CAFortune.
+        <br>
+        <a href="https://www.hain.com" target="_blank">Visit Hain Celestial</a>
+    </footer>
+</body>
+</html>

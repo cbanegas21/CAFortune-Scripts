@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hain Celestial Reporting Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("background.jpg") center/cover no-repeat;
+      z-index: -1;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* HEADER */
+    .header {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to right, #2785e3, #00812b);
+      padding: 15px 30px;
+    }
+    .header-logo-wrapper {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      border-radius: 50px;
+    }
+    .header img {
+      height: 48px;
+    }
+    .header h1 {
+      color: #ffffff;
+      font-size: 1.6em;
+      font-weight: 700;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 40px 20px;
+      overflow-y: auto;
+    }
+
+    .welcome-box {
+      background: rgb(1, 104, 23);
+      backdrop-filter: blur(10px);
+      padding: 25px 35px;
+      border-radius: 4px;
+      max-width: 600px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .welcome-box h2 {
+      color: #ffffff;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+
+    .welcome-box p {
+      color: #ffffff;
+      font-size: 1em;
+    }
+
+    .subtext {
+      color: #abf4fd;
+      margin-top: 8px;
+      font-size: 0.95em;
+      font-weight: 500;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    .report-card {
+      background: rgba(255, 255, 255, 0.672);
+      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .report-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(3, 235, 57, 0.9);
+    }
+
+    .report-card img {
+      width: 100%;
+      height: 76px;
+      object-fit: contain;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .report-card span {
+      display: block;
+      padding: 12px;
+      font-size: 1em;
+      text-align: center;
+      font-weight: 600;
+      color: #000000;
+      text-shadow:
+        -1px -1px 0 #fff,
+        1px -1px 0 #fff,
+        -1px  1px 0 #fff,
+        1px  1px 0 #fff;
+    }
+
+
+
+    .report-card a {
+      text-decoration: none;
+      display: block;
+    }
+
+    footer {
+      flex: 0 0 auto;
+      background: linear-gradient(to right, #003976, #00540f);
+      color: #ffffff;
+      text-align: center;
+      padding: 22px;
+      font-size: 0.95em;
+    }
+
+    footer a {
+      color: #2dfb91;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 1024px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+      .header img {
+        height: 42px;
+      }
+      .header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-logo-wrapper">
+        <img src="logo.png" alt="Our Home Logo" />
+      </div>
+      <h1>Hain Celestial Reporting Portal</h1>
+      <img src="CAFORTUNE.png" alt="CAFORTUNE Logo" />
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="welcome-box">
+        <h2>Welcome to Hain Celestial Reporting Portal</h2>
+        <p>Quickly access your reports.</p>
+        <div class="subtext">Reports V2</div>
+      </div>
+
+      <div class="gallery">
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiYjg3NGNkY2EtOGVhZi00OTk3LThjNDMtZjE0OGE1NjY5Y2RhIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="GOF.png" alt="Garden of Eatin' Tortilla"><span>Garden of Eatin' Tortilla</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiZTdjN2U2NjUtOTQyNi00ODI5LThkYzAtMjhjNWMyMjI2N2IyIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="gardenofveggie.jpeg" alt="Garden Veggie Straws"><span>Garden Veggie Straws</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiOWE3OTNkMTItMjBhNS00MTRlLTg0NmQtMjI2NGU3YjA5YTYxIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="logo.png" alt="Snacks"><span>Snacks Independent (Terra,GOE)</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiOTg5YTI3MmItOTY0Ni00YjFmLWJlNGItNjNmMmIxZTE3NjI2IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="terra.png" alt="Terra"><span>TERRA</span></a></div>
+
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      &copy; 2025 Hain Celestial Reports. Made by Carlos Banegas from CAFortune.
+      <a href="https://www.hain.com" target="_blank">Visit Hain</a>
+    </footer>
+  </div>
+</body>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Back to Nature Reporting Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                  url("background.png") center/cover no-repeat;
+      z-index: -1;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* HEADER */
+    .header {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to right, #73aeea, #f67424);
+      padding: 15px 30px;
+    }
+    .header-logo-wrapper {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      border-radius: 50px;
+    }
+    .header img {
+      height: 48px;
+    }
+    .header h1 {
+      color: #abf4fd;
+      font-size: 1.6em;
+      font-weight: 700;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 40px 20px;
+      overflow-y: auto;
+    }
+
+    .welcome-box {
+      background: rgba(63, 8, 2, 0.3);
+      backdrop-filter: blur(10px);
+      padding: 25px 35px;
+      border-radius: 4px;
+      max-width: 600px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .welcome-box h2 {
+      color: #fb862d;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+
+    .welcome-box p {
+      color: #ffffff;
+      font-size: 1em;
+    }
+
+    .subtext {
+      color: #abf4fd;
+      margin-top: 8px;
+      font-size: 0.95em;
+      font-weight: 500;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    .report-card {
+      background: rgba(255, 255, 255, 0.472);
+      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .report-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(229, 100, 2, 0.9);
+    }
+
+    .report-card img {
+      width: 100%;
+      height: 76px;
+      object-fit: contain;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .report-card span {
+      display: block;
+      padding: 12px;
+      font-size: 1em;
+      text-align: center;
+      font-weight: 600;
+      color: #000000;
+      text-shadow:
+        -1px -1px 0 #fff,
+        1px -1px 0 #fff,
+        -1px  1px 0 #fff,
+        1px  1px 0 #fff;
+    }
+
+
+
+    .report-card a {
+      text-decoration: none;
+      display: block;
+    }
+
+    footer {
+      flex: 0 0 auto;
+      background: linear-gradient(to right, #40566d, #f67124);
+      color: #ffffff;
+      text-align: center;
+      padding: 22px;
+      font-size: 0.95em;
+    }
+
+    footer a {
+      color: #2dfb91;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 1024px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+      .header img {
+        height: 42px;
+      }
+      .header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-logo-wrapper">
+        <img src="logo.png" alt="Our Home Logo" />
+      </div>
+      <h1>Back to Nature Reporting Portal</h1>
+      <img src="CAFORTUNE.png" alt="CAFORTUNE Logo" />
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="welcome-box">
+        <h2>Welcome to Back to Nature Reporting Portal</h2>
+        <p>Quickly access your reports.</p>
+        <div class="subtext">Reports V2</div>
+      </div>
+
+      <div class="gallery">
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiNGRhMDMyODctMDc3NC00NzU1LWJhN2MtNTNmYWVjMGMxYTNmIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="wholefoods.png" alt="Back to Nature Whole Foods"><span>Back to Nature Whole Foods</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiMjk2MzRmMDUtNDI5Mi00MzdjLWE4NWMtZmFhZDk3MzhkOTdiIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="wakefern.png" alt="Back to Nature Wakefern"><span>Back to Nature Wakefern</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiOGFiYWZhMzAtZjg1ZS00ZDAyLWJhNGYtOTUyNTgwZmY0YzMwIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="infra.png" alt="Back to Nature INFRA"><span>Back to Nature INFRA</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiODM3OGU1Y2QtZjdiOS00NjkxLThkZmItZmUzN2I4ODEzZjA2IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="NCG.png" alt="Back to Nature NCG"><span>Back to Nature NCG</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiYTZjOTNiYTctNzQyMi00ZWEzLTg1MmQtZDdiY2FkNzc4ZWFiIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="NGVC.png" alt="Back to Nature NGVC"><span>Back to Nature NGVC</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiMGE3NDllNzUtZmJmZC00ZTYxLTgzOGQtOWE1MzYzOTkxYzYxIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="wholefoods.png" alt="Back to Nature Whole Foods Promo"><span>Back to Nature Whole Foods Promo</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiMDYwNTA3ZDctODljNy00OGVjLWJkMTktZTE4ZDc3NGQ2ZjYyIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="wegmans.png" alt="Back to Nature Wegmans"><span>Back to Nature Wegmans</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiOWNjZTEzZDYtNmY3NC00ZGM0LTg4NDEtMDYyYTQ0ZDA3ODljIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="publix.png" alt="Back to Nature Publix"><span>Back to Nature Publix</span></a></div>
+        <div class="report-card"><a href="https://app.powerbi.com/view?r=eyJrIjoiMjU5ZTliM2YtNTY4MC00MmEyLWI2NjktYmRhN2MxN2M5MWY2IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" ><img src="sprouts.png" alt="Back to Nature Sprouts"><span>Back to Nature Sprouts Promo</span></a></div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      &copy; 2025 Back to Nature Reports. Made by Carlos Banegas from CAFortune.
+      <a href="https://www.backtonaturefoods.com" target="_blank">Visit Back to Nature</a>
+    </footer>
+  </div>
+</body>
