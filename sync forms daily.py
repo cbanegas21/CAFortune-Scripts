@@ -80,7 +80,9 @@ def convert_date(ms_date):
         return None
     try:
         timestamp = int(ms_date[6:19])
-        return datetime.utcfromtimestamp(timestamp / 1000)
+        dt = datetime.utcfromtimestamp(timestamp / 1000)
+        # Truncar microsegundos para evitar overflow
+        return dt.replace(microsecond=0)
     except Exception as e:
         logger.error(f"Error converting date: {str(e)}")
         return None
@@ -138,6 +140,7 @@ def insert_chunk(cursor, table_name, df, column_order):
     
     # Insertar en chunks
     total_rows = len(safe_df)
+    skipped_rows = 0
     for i in range(0, total_rows, CHUNK_SIZE):
         chunk = safe_df.iloc[i:i+CHUNK_SIZE]
         try:
@@ -146,8 +149,29 @@ def insert_chunk(cursor, table_name, df, column_order):
             logger.info(f"Insertados {len(chunk)} registros en {table_name} (lote {i//CHUNK_SIZE + 1})")
         except pyodbc.Error as e:
             cursor.rollback()
-            logger.error(f"Error insertando datos en {table_name}: {str(e)}")
-            raise
+            error_code = str(e)
+            # Si es error de tamaño de fila o datetime, intentar insertar fila por fila
+            if '511' in error_code or '22008' in error_code:
+                logger.warning(f"Error en chunk, insertando fila por fila en {table_name}")
+                for idx, row in enumerate(chunk.values.tolist()):
+                    try:
+                        cursor.execute(insert_sql, row)
+                        cursor.commit()
+                    except pyodbc.Error as row_error:
+                        row_error_code = str(row_error)
+                        if '511' in row_error_code or '22008' in row_error_code:
+                            skipped_rows += 1
+                            logger.warning(f"Fila {i+idx+1} omitida en {table_name}: error de tamaño o formato de fecha")
+                        else:
+                            cursor.rollback()
+                            logger.error(f"Error insertando fila {i+idx+1} en {table_name}: {str(row_error)}")
+                            raise
+            else:
+                logger.error(f"Error insertando datos en {table_name}: {str(e)}")
+                raise
+    
+    if skipped_rows > 0:
+        logger.warning(f"Total de filas omitidas en {table_name}: {skipped_rows}")
 
 def get_last_synced_form_id(cursor):
     try:
@@ -284,8 +308,8 @@ def main():
                         insert_chunk(cursor, form_name, df, column_order)
                         logger.info(f"Insertados {len(df)} registros en {form_name}")
                     
-                    update_sync_log(cursor, new_last_id)
-                    logger.info("Sincronización completada exitosamente")
+                    # MOVIDO AQUÍ - actualizar sync_log en conexión separada
+                    logger.info("Actualizando log de sincronización...")
                     break
                     
             except pyodbc.OperationalError as e:
@@ -299,6 +323,16 @@ def main():
             except Exception as e:
                 logger.error(f"Error durante operaciones de base de datos: {str(e)}")
                 raise
+        
+        # CRÍTICO: Actualizar sync_log DESPUÉS de todas las inserciones
+        try:
+            with closing(get_db_connection()) as conn:
+                cursor = conn.cursor()
+                update_sync_log(cursor, new_last_id)
+                logger.info("Sincronización completada exitosamente")
+        except Exception as e:
+            logger.error(f"Error actualizando sync_log: {str(e)}")
+            raise
                 
     except Exception as e:
         logger.error(f"Error crítico: {str(e)}")

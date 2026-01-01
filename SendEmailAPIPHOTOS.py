@@ -4,8 +4,8 @@ import requests, pandas as pd, openpyxl
 from requests.auth import HTTPBasicAuth
 
 # ── CONFIG ──────────────────────────────────────────────────────────
-START_DATE = dt.date(2025, 10, 10)       # inclusive
-END_DATE   = dt.date(2025, 10, 16)       # inclusive
+START_DATE = dt.date(2025, 12, 12)       # inclusive
+END_DATE   = dt.date(2025, 12, 27)       # inclusive
 
 REPSLY_USER = "80941603-F785-4E0F-8AB1-ED798E54F88C"
 REPSLY_PASS = "17BCD0FD-94DD-4B0C-B059-76D68C1145A8"

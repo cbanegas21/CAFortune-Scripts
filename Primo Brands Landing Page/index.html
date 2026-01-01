@@ -24,12 +24,16 @@
     .welcome-box p{color:#fff;font-size:.98rem}
     .subtext{color:#abf4fd;margin-top:6px;font-size:.9rem;font-weight:500}
 
-    /* GALLERY GRID 2 COLS */
-    .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;max-width:960px;width:100%;margin-bottom:48px}
-    .report-card{background:rgba(255,255,255,.48);backdrop-filter:blur(10px);border-radius:14px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.1);transition:transform .25s ease,box-shadow .25s ease}
+    /* RETAILER SECTIONS */
+    .retailer-section{max-width:960px;width:100%;margin-bottom:48px}
+    .retailer-header{color:#2dfb91;font-size:1.25rem;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:1px;text-shadow:0 2px 4px rgba(0,0,0,.3)}
+
+    /* GALLERY GRID 3 COLS - Responsive */
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;width:100%;margin-bottom:28px}
+    .report-card{background:rgba(255,255,255,.48);backdrop-filter:blur(10px);border-radius:14px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.1);transition:transform .25s ease,box-shadow .25s ease;cursor:pointer}
     .report-card:hover{transform:translateY(-4px);box-shadow:0 8px 18px rgba(45,251,145,.85)}
-    .report-card img{width:100%;height:80px;object-fit:contain;padding:10px;background:rgba(255,255,255,.12)}
-    .report-card span{display:block;padding:14px 10px;font-size:1rem;text-align:center;font-weight:600;color:#000;text-shadow:-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff}
+    .report-card img{width:100%;height:70px;object-fit:contain;padding:10px;background:rgba(255,255,255,.12)}
+    .report-card span{display:block;padding:12px 10px;font-size:.9rem;text-align:center;font-weight:600;color:#000;text-shadow:-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff;line-height:1.3}
     .report-card a{text-decoration:none;display:block}
 
     footer{flex:0 0 auto;background:linear-gradient(to right,#40566d,#2451f6);color:#fff;text-align:center;padding:20px;font-size:.9rem}
@@ -37,11 +41,15 @@
     footer a:hover{text-decoration:underline}
 
     /* RESPONSIVE */
+    @media(max-width:1024px){
+      .gallery{grid-template-columns:repeat(2,1fr)}
+    }
     @media(max-width:768px){
       .gallery{grid-template-columns:1fr}
       .header{padding:12px 16px}
       .header h1{font-size:1.3rem}
       .header .logo{height:60px}
+      .retailer-header{font-size:1.1rem}
     }
   </style>
 </head>
@@ -58,49 +66,130 @@
     <main class="hero">
       <div class="welcome-box">
         <h2>Welcome to Primo Premium Brands<br>Retailer Reporting Portal</h2>
-        <p>Quickly access your retailer reports below.</p>
-        <div class="subtext">Reports V2</div>
+        <p>Access dashboards for Mountain Valley, Regional Water, Saratoga, and Pure Life across all major retailers.</p>
+        <div class="subtext">Reports V3 – Complete Dashboard Suite</div>
       </div>
 
-      <!-- DASHBOARD GALLERY (Left = Whole Foods, Right = Sprouts) -->
-      <section class="gallery">
-        <!-- Row 1 -->
-        <div class="report-card">
-          <a href="https://app.powerbi.com/view?r=eyJrIjoiMjkzZWRjZGQtYjg2ZC00NjA4LWI3Y2ItYWFkMjYxNmY1NzUxIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
-            <img src="wholefoods.png" alt="Whole Foods 24‑Pack" />
-            <span>24‑Pack Regional Spring Water – Whole Foods</span>
-          </a>
-        </div>
+      <!-- WHOLE FOODS MARKET -->
+      <section class="retailer-section">
+        <div class="retailer-header">🏪 Whole Foods Market</div>
+        <div class="gallery">
+          <div class="report-card">
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiMjkzZWRjZGQtYjg2ZC00NjA4LWI3Y2ItYWFkMjYxNmY1NzUxIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+              <img src="wholefoods.png" alt="Regional Water" />
+              <span>Regional Water</span>
+            </a>
+          </div>
 
-        <div class="report-card">
-          <a href="https://app.powerbi.com/view?r=eyJrIjoiYWY3YzAxZmUtM2RmOS00ODIzLWE1ZDMtMTg4YjFlZDA1MWU0IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
-            <img src="sprouts.png" alt="Sprouts 24‑Pack" />
-            <span>2.5 gallon Regional Water - Sprouts</span>
-          </a>
-        </div>
+          <div class="report-card">
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiMDlhZDM1NjctMTQyMC00ZDNmLWFjMWYtZWM5OThhY2FhODI5IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+              <img src="wholefoods.png" alt="Mountain Valley" />
+              <span>Mountain Valley</span>
+            </a>
+          </div>
 
-        <!-- Row 2 -->
-        <div class="report-card">
-          <a href="https://app.powerbi.com/view?r=eyJrIjoiNTFmYTIwYTktZDY4My00NWFjLTgzOTEtZThmM2MyZTQ1Zjk4IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
-            <img src="wholefoods.png" alt="Whole Foods Premium" />
-            <span>Premium Water Brands – Whole Foods</span>
-          </a>
-        </div>
-
-        <div class="report-card">
-          <a href="https://app.powerbi.com/view?r=eyJrIjoiNmE2NzJiODctYWEwZS00MWE0LWE2NzUtN2E5MjJkMzYxM2Q5IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
-            <img src="sprouts.png" alt="Sprouts Premium" />
-            <span>Premium Water Brands – Sprouts</span>
-          </a>
-        </div>
-
-        <div class="report-card">
-          <a href="https://app.powerbi.com/view?r=eyJrIjoiYzAxZmMwOTgtYTAyYi00MjlhLTk5ZjMtMzQzMDc3NjhhMDZiIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
-            <img src="naturalgrocers.png" alt="Primo NGVC" />
-            <span>Primo – NGVC</span>
-          </a>
+          <div class="report-card">
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiNTA5MGM0N2ItNTFiMS00ZDlkLTgzZTQtYzEyMzVhNDFhOTc0IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+              <img src="wholefoods.png" alt="Saratoga" />
+              <span>Saratoga</span>
+            </a>
+          </div>
         </div>
       </section>
+
+      <!-- SPROUTS FARMERS MARKET -->
+      <section class="retailer-section">
+        <div class="retailer-header">🥬 Sprouts Farmers Market</div>
+        <div class="gallery">
+          <div class="report-card">
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiZWNhNTcxNTUtMjU2YS00NGRkLTllY2ItMTQ4Nzg3ZDJmOTY0IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+              <img src="sprouts.png" alt="Regional Water" />
+              <span>Regional Water</span>
+            </a>
+          </div>
+
+          <div class="report-card">
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiNmE2NzJiODctYWEwZS00MWE0LWE2NzUtN2E5MjJkMzYxM2Q5IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+              <img src="sprouts.png" alt="Primo Portfolio" />
+              <span>Primo BRANDS (Saratoga, Mountain Valley, Pure Life)</span>
+            </a>
+          </div>
+
+          <div class="report-card">
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiYTdlODc2NjctN2Q0Yy00ODU3LWJlZjYtMTNjOTBlYjRjNmIxIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+              <img src="sprouts.png" alt="Saratoga" />
+              <span>Saratoga</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- NATURAL GROCERS -->
+      <section class="retailer-section">
+        <div class="retailer-header">🌿 Natural Grocers</div>
+        <div class="gallery">
+          <div class="report-card">
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiOGFlYTM1MjgtM2M4Ny00NWQxLTk4MWMtNTg5ZjcxNDAwNTUyIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+              <img src="naturalgrocers.png" alt="Pure Life" />
+              <span>Pure Life</span>
+            </a>
+          </div>
+
+          <div class="report-card">
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiOGExOTk1NWItYTJlYy00ODRjLWJlZWQtMjBlNzY4ZGFiNGJmIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+              <img src="naturalgrocers.png" alt="Mountain Valley" />
+              <span>Mountain Valley</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- THE FRESH MARKET -->
+      <section class="retailer-section">
+        <div class="retailer-header">🛒 The Fresh Market</div>
+        <div class="gallery">
+          <div class="report-card">
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiMjlkM2EyODYtODkzZi00YzUwLWEwMWItYTliNmI0NDRkMTU5IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+              <img src="freshmarket.png" alt="Mountain Valley" />
+              <span>Mountain Valley</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- FRESH THYME MARKETS -->
+      <section class="retailer-section">
+        <div class="retailer-header">🍃 Fresh Thyme Markets</div>
+        <div class="gallery">
+          <div class="report-card">
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiNWY1MmM5YWMtYWEwZi00NGU2LTlhYTQtNDFlODY3ZTc0YWZhIiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+              <img src="freshthyme.png" alt="Saratoga" />
+              <span>Saratoga</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- MULTI-RETAILER BRANDS -->
+      <section class="retailer-section">
+        <div class="retailer-header">📊 Cross-Retailer Regional Water</div>
+        <div class="gallery">
+          <div class="report-card">
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiYWY3YzAxZmUtM2RmOS00ODIzLWE1ZDMtMTg4YjFlZDA1MWU0IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+              <img src="CAFORTUNE.png" alt="Regional Water Multi-Retailer" />
+              <span>Regional Water - Multi-Retailer Overview</span>
+            </a>
+          </div>
+
+          <div class="report-card">
+            <a href="https://app.powerbi.com/view?r=eyJrIjoiZTcyMWFiODUtZWExZS00YjdlLTg1NjktZDg4ODUwNzdkN2M4IiwidCI6ImRkOWE4ODUyLTUzOWUtNGFkZC1hOGY3LTBmZjQzYjI0ZWIwYSIsImMiOjN9" target="_blank" rel="noopener noreferrer">
+              <img src="CAFORTUNE.png" alt="Regional Water Detailed" />
+              <span>Regional Water - Detailed Analysis</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
     </main>
 
     <!-- FOOTER -->

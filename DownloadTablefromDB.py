@@ -22,8 +22,8 @@ from tenacity import retry, stop_after_attempt, wait_fixed, retry_if_exception_t
 # ==============================
 
 # Fechas (incluye el día final)
-FROM_DATE = date(2025, 6, 1)
-TO_DATE   = date(2025, 9, 13)
+FROM_DATE = date(2025, 10, 31)
+TO_DATE   = date(2025, 12, 6)
 
 # Conexión Azure SQL
 SERVER   = 'ca-data-server.database.windows.net'
@@ -34,7 +34,7 @@ ODBC_DRIVER = '{ODBC Driver 18 for SQL Server}'  # o '{ODBC Driver 17 for SQL Se
 CONNECTION_TIMEOUT = 30
 
 # Exportación Excel
-OUTPUT_XLSX = r'C:\Exports\ExecutiveSummary_2025-05-01_to_2025-07-13.xlsx'
+OUTPUT_XLSX = r'C:\Exports\ExecutiveSummary_2025-10-31_to_2025-12-06.xlsx'
 CHUNK_SIZE = 50_000
 MAX_ROWS_PER_SHEET = 1_048_000   # debajo del máximo 1,048,576 (incluye header)
 SHEET_PREFIX = 'Data'            # Data1, Data2, ...
